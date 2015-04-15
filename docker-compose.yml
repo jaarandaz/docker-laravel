@@ -1,15 +1,23 @@
+composerdata:
+  image: jaarandaz/composer-data
+
 mysqldata:
   image: jaarandaz/mariadb-data
 
 mysql:
   image: mariadb
   environment:
-    MYSQL_PASS: root
+    MYSQL_ROOT_PASSWORD: root_password
+    MYSQL_USER: user
+    MYSQL_PASSWORD: password
+    MYSQL_DATABASE: database
   volumes_from:
     - mysqldata
 
 phpnginx:
   image: jaarandaz/php-fpm-nginx
+  volumes_from:
+    - composerdata
   links:
     - mysql
   ports:
