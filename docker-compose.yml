@@ -4,6 +4,9 @@ composerdata:
 mysqldata:
   image: jaarandaz/mariadb-data
 
+npmdata:
+  image: jaarandaz/npm-data
+
 mysql:
   image: mariadb
   environment:
@@ -13,6 +16,13 @@ mysql:
     MYSQL_DATABASE: database
   volumes_from:
     - mysqldata
+
+bowergulp:
+  image: jaarandaz/bower-gulp
+  volumes_from:
+    - npmdata
+  volumes:
+    - ./src:/data
 
 phpnginx:
   image: jaarandaz/php-fpm-nginx
